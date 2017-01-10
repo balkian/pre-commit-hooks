@@ -1,0 +1,6 @@
+- id: branchversion
+  name: Check branch and VERSION
+  description: This hook avoids commiting a pre-release to a master branch.
+  entry: branchversion
+  language: python
+  files: VERSION$
