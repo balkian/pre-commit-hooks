@@ -1,4 +1,4 @@
 include requirements.txt
 include test-requirements.txt
 include README.md
-include balkian-pre-commit/VERSION
+include balkian_pre_commit/VERSION
