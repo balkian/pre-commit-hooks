@@ -15,11 +15,16 @@ def main(argv=None):
             prevcontent = check_output(['git', 'show', 'HEAD:{}'.format(fn)]).strip().decode()
             current = semver.parse_version_info(currentcontent)
             print('Checking versions: {} -> {}'.format(prevcontent, currentcontent))
-            if (branch_name == 'master' and current.prerelease) or\
-                (semver.compare(currentcontent, prevcontent)<1):
+            if branch_name == 'master' and current.prerelease:
+                print('Trying to push a pre-release version to a master branch')
+                return 1
+            elif semver.compare(currentcontent, prevcontent)<1:
+                print('The new version should be newer than the old one')
                 return 1
             else:
                 error = 0
+    if error:
+        print('VERSION files should be bumped in every commit')
     return error
 
 if __name__ == '__main__':
